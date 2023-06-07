@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <!-- Link to CSS -->
+  <link rel="stylesheet" href="./../style.css">
+  <!-- Box icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+
+<body>
+
+  <script>
+    function setup() {
+      // Write your code here.
+      var rating = document.getElementById("rating");
+      var spans = rating.getElementsByTagName("span");
+
+      for (let i = 0; i < spans.length; i++) {
+        spans[i].addEventListener("click", function() {
+          for (let j = 0; j <= i; j++) {
+            if(spans[j]) {
+              spans[j].classList.add("active");
+            }
+          }
+          for (let j = i + 1; j < spans.length; j++) {
+            if(spans[j]) {
+              spans[j].classList.remove("active");
+            }
+          }
+        }, true);
+      }
+    }
+
+    // Example case. 
+    document.body.innerHTML = `
+    <div id='rating'>
+      <span>*</span>
+      <span>*</span>
+      <span>*</span>
+      <span>*</span>
+      <span>*</span>
+    </div>
+    
+    <section class="problem" id="problem">
+    <div class="heading">
+      <h1>Problem Statement</h1>
+    </div>
+    <div class="container">
+      <div class="box-img">
+        <img src="first.png">
+      </div>
+      <div class="box-img">
+        <img src="second.png">
+      </div>
+    </div>
+  </section>`;
+
+    setup();
+
+    document.getElementsByTagName("span")[2].click();
+    console.log(document.body.innerHTML);
+  </script>
+  <style>
+    .active {
+      background-color: lightcoral;
+    }
+  </style>
+</body>
+
+</html>
