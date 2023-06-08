@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="" />
+  <!-- Link to CSS -->
+  <link rel="stylesheet" href="./../style.css">
+  <!-- Box icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+</head>
+
+<body>
+  <script>
+    // call example 
+    var car = { 
+      registrationNumber: "GA12345",
+      brand: "Toyota",
+
+      displayDetails: function(){
+        console.log(this.registrationNumber + " " + this.brand);
+      }
+    }
+
+    console.log('car details', car.displayDetails());
+
+    function memoize(func) {
+      let cache = {};
+
+      function fn(...args) {
+        const key = JSON.stringify(args);
+        if (cache[key]) {
+          return cache[key];
+        }
+        const result = func.apply(this, args);  // here this is a Window object
+        cache[key] = result;
+        return result;
+      }
+
+      fn.clear = function () {  cache = {}; };
+      return fn;
+    }
+
+    function square(num) {
+      console.log('calling square of', num);
+      return num * num;
+    }
+
+    const memoizedSquare = memoize(square);
+
+    memoizedSquare(1);
+    memoizedSquare(1);
+    memoizedSquare(2);
+    memoizedSquare.clear();
+    memoizedSquare(2);
+    memoizedSquare(3);
+
+    function addition(a, b, c, d) {
+      console.log('calling addition of', a, b, c, d);
+      return a + b + c + d;
+    }
+
+    const memoizedAddition = memoize(addition);
+
+    memoizedAddition(1, 2, 3, 4);
+    memoizedAddition(1, 2, 3, 4);
+    memoizedAddition(4, 2, 3, 1);
+    memoizedAddition(6, 7, 8, 9);
+    memoizedAddition(6, 7, 8, 9);
+  </script>
+</body>
+
+</html>
